@@ -1,4 +1,4 @@
-name: Upstream Sync and Deploy to Vercel
+name: Upstream Sync
 
 permissions:
   contents: write
@@ -12,7 +12,7 @@ on:
 
 jobs:
   sync_latest_from_upstream:
-    name: Sync latest commits from upstream repo and deploy
+    name: Sync latest commits from upstream repo
     runs-on: ubuntu-latest
     if: ${{ github.event.repository.fork }}
 
@@ -34,15 +34,6 @@ jobs:
           target_sync_branch: main
           target_repo_token: ${{ secrets.GITHUB_TOKEN }} # automatically generated, no need to set
           test_mode: false
-
-      - name: Deploy to Vercel
-        if: success()
-        uses: amondnet/vercel-action@v20
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          prod: '--prod'  # 如果你想部署到生产环境，则设置为 true
 
       - name: Sync check
         if: failure()
