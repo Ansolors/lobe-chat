@@ -42,7 +42,7 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          prod: true  # 如果你想部署到生产环境，则设置为 true
+          prod: '--prod'  # 如果你想部署到生产环境，则设置为 true
 
       - name: Sync check
         if: failure()
